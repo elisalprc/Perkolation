@@ -21,20 +21,16 @@ public class Perkolation {
                 
                 boolean[][] casesVisitees = new boolean[l][c];
 		int i=0,j=0,m,n;
-                boolean v=false;
+                boolean v;
                 
-                for(int ligne=0;ligne<l;ligne++) {   //"on essaie de partir de chaque case de la prmeiere ligne"
-                    v = eltInfini(Grille,casesVisitees,l,c,ligne,0);
-                    if (v==true) {
-                        break; }
-
-                    }
+                v = eltInfiniBIS(Grille, casesVisitees,l,c);
                 
                 
                 if(v) {
                     System.out.println("Es gibt eine undendliche zusammenhangende komponente");
                 }
-                else { System.out.println("keine undendliche zusammenhangende komponente gefunden :( "); }  // fin de l'exemple 
+                else { System.out.println("keine undendliche zusammenhangende komponente gefunden :( "); } 
+                // fin de l'exemple 
                 
                 //statistics(p,l,c);
 }
@@ -103,18 +99,41 @@ public class Perkolation {
           
         }
         
-        /*public static void statistics(float p, int l, int c) {
+        public static boolean eltInfiniBIS(int[][] G, boolean[][] cVisitees, int l, int c) {
+            boolean v = false;
+            for(int ligne=0;ligne<l;ligne++) {   //"on essaie de partir de chaque case de la premiere ligne"
+                    v = eltInfini(G,cVisitees,l,c,ligne,0);
+                    if (v==true) {
+                        break; }
+
+                    }
+            return (v);
+        } 
+        
+        //stats kritisches wert : avec un pas ??? 
+        /*public void statsKW() {
+            System.out.println("grosse des Gitter fur das studium");
+            System.out.println("Reihen :"); // lignes
+            int l = Lire.i();
+            System.out.println("Spalten :"); 
+            int c = Lire.i();
+            System.out.println("prazision der Kritische wert (zb : 0.01) :");
+            float epsilon = Lire.f();
+            int[][] git = new int[l][c];
             
-            System.out.println("taille echantillon =");
-            int t = Lire.i();
-            int[][] tabAlea = new int[l][c];
-            boolean[] infini = new boolean[t];
+            // calculs :
+            float pc = -1;
+            boolean v;
+            boolean[][] cV = new boolean[l][c];
+            while() {
+                git = perkolation(pc,l,c);
+                v = eltInfini(git,cV,l,c,int i = 0,int j =0);
+                // ici peut etre reajouter une fonction eltInfiniBIS qui contient les departs de chacune des cases 
+                //de la premiere colonne en plus de eltInfini pour ne pas les reecrire a chaque fois 
+            }
+           
             
-            for(int i = 0;i<t;i++) {
-                tabAlea = perkolation(tabAlea,p,l,c);
-        }
-            
-        }  */
+        } */
 
 }
 
