@@ -6,7 +6,7 @@ package com.mycompany.perkolation;
 public class Perkolation {
 	
 	public static void main (String[] args) {
-		
+		/*
 		System.out.println("p =");
 		float p = Lire.f();
 		System.out.println("nb lignes");
@@ -31,9 +31,10 @@ public class Perkolation {
                 }
                 else { System.out.println("keine undendliche zusammenhangende komponente gefunden :( "); } 
                 // fin de l'exemple 
-                
+                */
                 //statistics(p,l,c);
-}
+                statsKW();
+}   
  
     
 	
@@ -111,7 +112,8 @@ public class Perkolation {
         } 
         
         //stats kritisches wert : avec un pas ??? 
-        /*public void statsKW() {
+        // idee : creer un tableau contenant toutes les valeurs de p selon le pas indiqué et faire une dichotomie 
+        public static void statsKW() {
             System.out.println("grosse des Gitter fur das studium");
             System.out.println("Reihen :"); // lignes
             int l = Lire.i();
@@ -119,6 +121,19 @@ public class Perkolation {
             int c = Lire.i();
             System.out.println("prazision der Kritische wert (zb : 0.01) :");
             float epsilon = Lire.f();
+            int t = (Math.round(1/epsilon) + 1);
+            float[] pw = new float[t];
+            pw[0] = 0;
+            
+            int i=1;
+            // remplissage pw 
+            while(i<t) {
+                pw[i]=pw[i-1]+epsilon;
+                i++;   
+            }
+             // ok --> dichotomie 
+          
+            /*
             int[][] git = new int[l][c];
             
             // calculs :
@@ -131,9 +146,9 @@ public class Perkolation {
                 // ici peut etre reajouter une fonction eltInfiniBIS qui contient les departs de chacune des cases 
                 //de la premiere colonne en plus de eltInfini pour ne pas les reecrire a chaque fois 
             }
-           
+           */
             
-        } */
+        } 
 
 }
 
