@@ -132,6 +132,12 @@ public class Perkolation {
                 i++;   
             }
              // ok --> dichotomie 
+             // premier p et dernier d et milieu M (correspond aux valeurs de pw) 
+             // evaluation de la verite de eltInfiniBIS pour p = pw[M] -
+             // si vrai : dernier = M-1 et M= (p+d)/2
+             // si faux : premier = M+1 et M = (p+d)/2
+             // une fois que d=p on a la plus petite valeur de p qui annonce qu'il y a un elt infini
+             // la probabilité correspondante est recupere dans pw 
           
             /*
             int[][] git = new int[l][c];
