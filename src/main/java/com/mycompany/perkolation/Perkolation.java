@@ -6,7 +6,7 @@ package com.mycompany.perkolation;
 public class Perkolation {
 	
 	public static void main (String[] args) {
-		/*
+                System.out.println("Hallo :) Lass uns Perkolation studieren. Aber was ist Perkolation ??? Hier ist ein Beispiel. ");
 		System.out.println("p =");
 		float p = Lire.f();
 		System.out.println("nb lignes");
@@ -27,12 +27,11 @@ public class Perkolation {
                 
                 
                 if(v) {
-                    System.out.println("Es gibt eine undendliche zusammenhangende komponente");
+                    System.out.println("\n \n Es gibt eine undendliche zusammenhangende komponente");
                 }
-                else { System.out.println("keine undendliche zusammenhangende komponente gefunden :( "); } 
-                // fin de l'exemple 
-                */
-                //statistics(p,l,c);
+                else { System.out.println("\n \n keine undendliche zusammenhangende komponente gefunden :( "); } 
+                System.out.println("\n \n Ende des Beispiels. Jetzt Berechnung !! "); 
+                
                 statsKW();
 }   
  
@@ -114,6 +113,7 @@ public class Perkolation {
         //stats kritisches wert : avec un pas ??? 
         // idee : creer un tableau contenant toutes les valeurs de p selon le pas indiqué et faire une dichotomie 
         public static void statsKW() {
+            System.out.println("Lass uns das Kritisches wert schatzen. Es soll nach unseres Dokument 0.5 sein.");
             System.out.println("grosse des Gitter fur das studium");
             System.out.println("Reihen :"); // lignes
             int l = Lire.i();
@@ -125,12 +125,20 @@ public class Perkolation {
             float[] pw = new float[t];
             pw[0] = 0;
             
-            int i=1;
-            // remplissage pw 
+            int i=1; 
+            // remplissage pw / pb que j'ai pas reussi à resoudre : c'est pas des valeurs arrodnies à epsilon près 
             while(i<t) {
                 pw[i]=pw[i-1]+epsilon;
                 i++;   
             }
+            
+            //affichage tableau pw
+            /*for(i=0;i<t;i++) {
+                System.out.println(pw[i]); }
+            */
+            
+            //******************************************************************************************
+            
              // ok --> dichotomie 
              // premier p et dernier d et milieu M (correspond aux valeurs de pw) 
              // evaluation de la verite de eltInfiniBIS pour p = pw[M] -
@@ -138,21 +146,33 @@ public class Perkolation {
              // si faux : premier = M+1 et M = (p+d)/2
              // une fois que d=p on a la plus petite valeur de p qui annonce qu'il y a un elt infini
              // la probabilité correspondante est recupere dans pw 
-          
-            /*
-            int[][] git = new int[l][c];
+             
+            // ****************************************************************************************
+             
+             int p=0;
+             int d=t-1;
+             int M=(p+d)/2;
+             
+             int[][] git = new int[l][c];
+             boolean[][] cV;
+             boolean v; 
+             
+             while((d-p)>0) {
+                 cV = new boolean[l][c];
+                 git = perkolation(pw[M],l,c);
+                 v = eltInfiniBIS(git,cV,l,c);
+                 if(v) {
+                     d = M-1;
+                     M=(p+d)/2;
+                 }
+                 else { 
+                     p=M+1;
+                     M=(p+d)/2;
+                 }
+             }
+             System.out.println("schatzung des kritisches wertes : " + pw[M]);
+             
             
-            // calculs :
-            float pc = -1;
-            boolean v;
-            boolean[][] cV = new boolean[l][c];
-            while() {
-                git = perkolation(pc,l,c);
-                v = eltInfini(git,cV,l,c,int i = 0,int j =0);
-                // ici peut etre reajouter une fonction eltInfiniBIS qui contient les departs de chacune des cases 
-                //de la premiere colonne en plus de eltInfini pour ne pas les reecrire a chaque fois 
-            }
-           */
             
         } 
 
