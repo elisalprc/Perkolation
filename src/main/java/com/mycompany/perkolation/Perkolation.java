@@ -9,9 +9,9 @@ public class Perkolation {
                 System.out.println("Hallo :) Lass uns Perkolation studieren. Aber was ist Perkolation ??? Hier ist ein Beispiel. ");
 		System.out.println("p =");
 		float p = Lire.f();
-		System.out.println("nb lignes");
+		System.out.println("Zahl von Reihen");
 		int l = Lire.i();
-		System.out.println("nb colonne");
+		System.out.println("Zahl von Spalten");
 		int c = Lire.i();
 		
 		int[][] Grille = new int[l][c];
@@ -27,9 +27,9 @@ public class Perkolation {
                 
                 
                 if(v) {
-                    System.out.println("\n \n Es gibt eine undendliche zusammenhangende komponente");
+                    System.out.println("\n \n Es gibt eine unendliche zusammenhangende komponente");
                 }
-                else { System.out.println("\n \n keine undendliche zusammenhangende komponente gefunden :( "); } 
+                else { System.out.println("\n \n keine unendliche zusammenhangende komponente gefunden :( "); } 
                 System.out.println("\n \n Ende des Beispiels. Jetzt Berechnung !! "); 
                 
                 statsKW();
@@ -54,7 +54,8 @@ public class Perkolation {
 			}
 		}
                 
-		for(i=1;i<l;i=i+2){       // les zones inacessibles "les carrés" 
+		                
+                for(i=1;i<l;i=i+2){       // les zones inacessibles "le centre des carrés"
 			for(j=1;j<c;j=j+2) {
 				G[i][j]= 0;
 			}
@@ -65,6 +66,7 @@ public class Perkolation {
 				G[i][j] = 1;
 			}
 		}
+                
 
                 return(G);
 		
@@ -82,14 +84,14 @@ public class Perkolation {
 
         // renvoie true si chemin de gauche à droite trouvé, false sinon
         public static boolean eltInfini(int[][] G, boolean[][] cVisitees,int l, int c, int i, int j) {            
-            if(i<0 || j<0 || i>=l || j>=c) {
+            if(i<0 || j<0 || i>=l || j>=c) {                    // si on est sortis de la grille
                 return false;
             }
-            else if( G[i][j] == 0 || cVisitees[i][j] == true) {
+            else if( G[i][j] == 0 || cVisitees[i][j] == true) {  // si on a deja visité cette case ou si elle est inaccessible (0)
                 return false; 
             }                                                   // le elif evite IOException
             
-            if(j==c-1) {
+            if(j==c-1) {          //signifie qu'on est arrives de l'autre cote 
                 return true;
             }
             
@@ -101,7 +103,7 @@ public class Perkolation {
         
         public static boolean eltInfiniBIS(int[][] G, boolean[][] cVisitees, int l, int c) {
             boolean v = false;
-            for(int ligne=0;ligne<l;ligne++) {   //"on essaie de partir de chaque case de la premiere ligne"
+            for(int ligne=0;ligne<l;ligne++) {   //"on essaie de partir de chaque case de la premiere ligne", car element infini ne part que de (i=0;j=0)
                     v = eltInfini(G,cVisitees,l,c,ligne,0);
                     if (v==true) {
                         break; }
@@ -110,7 +112,7 @@ public class Perkolation {
             return (v);
         } 
         
-        //stats kritisches wert : avec un pas ??? 
+        //stats kritisches wert 
         // idee : creer un tableau contenant toutes les valeurs de p selon le pas indiqué et faire une dichotomie 
         public static void statsKW() {
             System.out.println("Lass uns das Kritisches wert schatzen. Es soll nach unseres Dokument 0.5 sein.");
@@ -126,13 +128,13 @@ public class Perkolation {
             pw[0] = 0;
             
             int i=1; 
-            // remplissage pw / pb que j'ai pas reussi à resoudre : c'est pas des valeurs arrodnies à epsilon près 
+            // remplissage pw / pb que j'ai pas reussi à resoudre : c'est pas des valeurs arrondies à epsilon près alors que epsilon est arrondi 
             while(i<t) {
                 pw[i]=pw[i-1]+epsilon;
                 i++;   
             }
             
-            //affichage tableau pw
+            //affichage tableau pw : c'est le tableau contenant toutes les probabilités qui vont être testees
             /*for(i=0;i<t;i++) {
                 System.out.println(pw[i]); }
             */
